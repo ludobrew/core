@@ -1,0 +1,13 @@
+language: node_js
+language : node_js
+node_js :
+ - stable
+install:
+ - npm install
+script:
+ - npm test
+
+deploy:
+  provider: npm
+  email: "aabonh+npm@gmail.com"
+  api_key: AN AUTH KEY

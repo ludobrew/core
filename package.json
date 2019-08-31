@@ -1,0 +1,45 @@
+{
+  "name": "@ludobrew/core",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0",
+  "description": "LudoBrew core dependancies",
+  "author": "Aaron Haaf",
+  "repository": {
+    "url": "https://github.com/ludobrew/core",
+    "type": "git"
+  },
+  "files": [
+    "./*.js",
+    "./**/*.js",
+    "./**/*.d.ts"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "exit 0",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@emotion/core": "10.0.15",
+    "@emotion/styled": "10.0.15",
+    "dashify": "2.0.0",
+    "gatsby": "2.13.60",
+    "react-dom": "16.9.0",
+    "react": "16.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.5.5",
+    "@mdx-js/mdx": "^1.0.21",
+    "@mdx-js/react": "^1.0.21",
+    "@types/dashify": "1.0.0",
+    "@types/ncp": "2.0.1",
+    "@types/node": "^12.0.12",
+    "gatsby-plugin-emotion": "4.0.6",
+    "gatsby-plugin-mdx": "^1.0.7",
+    "gatsby-plugin-page-creator": "^2.0.12",
+    "gatsby-source-filesystem": "2.0.29",
+    "ncp": "2.0.0",
+    "typescript": "^3.5.2"
+  }
+}

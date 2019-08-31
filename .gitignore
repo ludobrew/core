@@ -1,0 +1,8 @@
+# nodejs stuff
+node_modules
+
+# Generated files
+*.js
+*.map
+*.d.ts
+*.tsbuildinfo

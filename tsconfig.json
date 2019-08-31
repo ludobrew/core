@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "incremental": true,
+    "pretty": true,
+    "strict": true,
+    "target": "es5",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "jsxFactory": "jsx",
+    "baseUrl": "./",
+    "lib": [
+      "dom",
+      "scripthost",
+      "esnext"
+    ],
+  },
+  "exclude": [
+    "node_modules",
+    "*.test.ts"
+  ],
+}
