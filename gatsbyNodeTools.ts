@@ -64,15 +64,14 @@ export const anchorate = (anchor: string) => {
  * Returns the node with the internal.contentDigest set
  */
 export const digest = <T extends Node>(node: T) => {
-  if(!node) {
+  if (!node) {
     console.log("Node was null", node)
     return null
   }
-  if(!node.internal){
+  if (!node.internal) {
     console.log("Node.internal was null", node)
-  return
-}
-  //@ts-ignore
+    return
+  }
   node.internal.contentDigest = createHash(`md5`)
     .update(JSON.stringify(node))
     .digest(`hex`)
@@ -81,3 +80,14 @@ export const digest = <T extends Node>(node: T) => {
 
 export const getFilePath = (fileNode: FileNode) =>
   `${contentBaseDir}/${fileNode.sourceInstanceName}/${fileNode.relativePath}`
+
+/**
+ * Turn a "x.y.z" into a nested thing for proxyResolve
+ * @param str string in a format of "x.y.z"
+ * @see https://github.com/jlengstorf/gatsby-advanced-graphql/blob/master/gatsby-node.js#L14
+ */
+export const splitProxyString = (str: string) =>
+  str.split(".").reduceRight((acc, chunk, currentIndex, arr) => {
+    const isLastItem = currentIndex === arr.length - 1
+    return { [chunk]: isLastItem ? true : acc }
+  }, {})

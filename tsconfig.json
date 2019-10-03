@@ -17,10 +17,10 @@
       "dom",
       "scripthost",
       "esnext"
-    ],
+    ]
   },
   "exclude": [
     "node_modules",
     "*.test.ts"
-  ],
+  ]
 }

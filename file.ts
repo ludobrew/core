@@ -71,7 +71,7 @@ export const createDirectories = async function(
 }
 
 type GenerateSourceFilesystemPluginsArgs = {
-  currentDir: string,
+  currentDir: string
   pluginId: string
   contentDirectories: readonly string[]
 }
@@ -86,7 +86,7 @@ export const generateSourceFilesystemPlugins = function(
     options: {
       name: [pluginId, path].join("/"),
       path: [contentBaseDir, pluginId, path].join("/"),
-      // ignore: [`**/\.*`],
+      ignore: [`**/\.*`],
     },
   }))
 }
