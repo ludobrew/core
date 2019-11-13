@@ -1,5 +1,5 @@
 import { createHash } from "crypto"
-import { Node } from "gatsby"
+import { Node, CreatePagesArgs, NodePluginArgs, Actions } from "gatsby"
 import dashify = require("dashify")
 import { contentBaseDir } from "./index"
 
@@ -91,3 +91,65 @@ export const splitProxyString = (str: string) =>
     const isLastItem = currentIndex === arr.length - 1
     return { [chunk]: isLastItem ? true : acc }
   }, {})
+
+/**
+ * Returns data, throws error
+ * @param graphql the graphql from the gatsby-node api
+ * @param query
+ */
+export const simpleGraphql = async (
+  graphql: CreatePagesArgs["graphql"],
+  query: string,
+) => {
+  const { errors, data } = await graphql(query)
+  if (errors) {
+    throw errors
+  }
+  return data
+}
+
+type HasCreateNode = {
+  createNodeId: NodePluginArgs["createNodeId"]
+  createContentDigest: NodePluginArgs["createContentDigest"]
+  actions: {
+    createNode: Actions["createNode"]
+  }
+}
+
+type GameInfo = {
+  /**
+   * Proper name like "Exalted 3rd Edition"
+   */
+  gameName: string
+
+  /**
+   * Short name for reference like "Ex3"
+   */
+  gameShortName: string
+
+  /**
+   * Short id used in paths like /dnd5e/
+   */
+  gameId: string
+
+  /**
+   * Short blurb about the game itself.
+   */
+  gameDescription: string
+}
+
+export const createLudobrewEntry = <T extends HasCreateNode>(
+  props: T,
+  gameInfo: GameInfo,
+) => {
+  const { gameName, gameId } = gameInfo
+  props.actions.createNode({
+    id: props.createNodeId(`LudoBrewEntry ${gameName}`),
+    ...gameInfo,
+    url: pathify(gameId),
+    internal: {
+      type: "LudoBrewEntry",
+      contentDigest: props.createContentDigest(gameInfo),
+    },
+  })
+}
