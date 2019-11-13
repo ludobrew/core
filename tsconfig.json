@@ -11,6 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": true,
     "noImplicitUseStrict": true,
+    "resolveJsonModule": true,
     "jsx": "react",
     "baseUrl": "./",
     "lib": [
@@ -20,7 +21,7 @@
     ]
   },
   "exclude": [
-    "node_modules",
+    "**/node_modules/**",
     "*.test.ts"
   ]
 }
