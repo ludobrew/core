@@ -6,3 +6,6 @@ node_modules
 *.map
 *.d.ts
 *.tsbuildinfo
+
+# Required gatsby js stuff that we use ts-node to jigger.
+!gatsby-*.js

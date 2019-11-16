@@ -1,6 +1,6 @@
 import { createHash } from "crypto"
 import { Node, CreatePagesArgs, NodePluginArgs, Actions } from "gatsby"
-import dashify = require("dashify")
+import dashify from "dashify"
 import { contentBaseDir } from "./index"
 
 /**

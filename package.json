@@ -3,6 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "main": "gatsby-config.js",
   "version": "1.0.0",
   "description": "LudoBrew core dependancies",
   "author": "Aaron Haaf",
@@ -18,8 +19,8 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn watch",
-    "watch": "tsc -w",
-    "build": "tsc"
+    "watch": "tsc --no-emit -w",
+    "build": "tsc --no-emit"
   },
   "dependencies": {
     "@emotion/core": "10.0.22",
@@ -30,7 +31,15 @@
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-helmet-async": "^1.0.4",
-    "theme-ui": "0.2.46"
+    "theme-ui": "0.2.46",
+    "gatsby-plugin-emotion": "4.1.13",
+    "gatsby-plugin-mdx": "1.0.55",
+    "gatsby-plugin-page-creator": "2.1.28",
+    "gatsby-plugin-react-helmet-async": "^1.0.8",
+    "gatsby-plugin-typescript": "2.0.11",
+    "gatsby-source-filesystem": "2.1.35",
+    "typescript": "3.7.2",
+    "ncp": "2.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.7.2",
@@ -42,15 +51,6 @@
     "@types/node": "12.12.7",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.4",
-    "@types/react-helmet-async": "^1.0.3",
-    "@types/theme-ui": "0.2.4",
-    "gatsby-plugin-emotion": "4.1.13",
-    "gatsby-plugin-mdx": "1.0.55",
-    "gatsby-plugin-page-creator": "2.1.28",
-    "gatsby-plugin-react-helmet-async": "^1.0.8",
-    "gatsby-plugin-typescript": "2.0.11",
-    "gatsby-source-filesystem": "2.1.35",
-    "ncp": "2.0.0",
-    "typescript": "3.7.2"
+    "@types/theme-ui": "0.2.4"
   }
 }

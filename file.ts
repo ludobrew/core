@@ -80,7 +80,7 @@ export const generateSourceFilesystemPlugins = function(
   args: GenerateSourceFilesystemPluginsArgs,
 ) {
   const { pluginId, contentDirectories, currentDir } = args
-  console.log(currentDir)
+
   return contentDirectories.map(path => ({
     resolve: "gatsby-source-filesystem",
     options: {

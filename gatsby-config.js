@@ -1,4 +1,4 @@
-module.exports = (themeOptions: any) => {
+module.exports = (themeOptions) => {
   return {
     plugins: [
       {
