@@ -1,4 +1,4 @@
-import { join, resolve } from "path"
+import { join, resolve, dirname } from "path"
 import { existsSync } from "fs"
 import { ParentSpanPluginArgs, PluginOptions } from "gatsby"
 import { mkdirpasync, ncpasync } from "./async"
@@ -21,9 +21,9 @@ type CreateDirectoriesArgs = {
   props: ParentSpanPluginArgs
   options: PluginOptions | undefined
   /**
-   * use based on `__dirname`
+   * Use the package.json name like "@ludobrew/game-exalted-3e"
    */
-  pluginDirectory: string
+  pluginPackageName: string
   pluginId: string
   contentDirectories: readonly string[]
 }
@@ -35,23 +35,21 @@ type CreateDirectoriesArgs = {
 export const createDirectories = async function(
   args: CreateDirectoriesArgs,
 ): Promise<SourceTarget[]> {
-  const { props, pluginDirectory, pluginId, contentDirectories } = args
+  const { props, pluginPackageName, pluginId, contentDirectories } = args
   const { store, reporter } = props
   const { program } = store.getState() as ExpectedGatsbyStoreState
   const myBrewRepoDir = program.directory // where it's running now
-  console.log({
-    props,
-    pluginDirectory,
-    pluginId,
-    contentDirectories,
-    myBrewRepoDir,
-  })
+
   // mybrew/homebrew/exalted3e
   const myBrewBase = join(myBrewRepoDir, contentBaseDir, pluginId)
   const to_make: SourceTarget[] = contentDirectories
     .filter(dir => !existsSync(join(myBrewBase, dir)))
     .map(dir => ({
-      source: resolve(pluginDirectory, templateDirName, dir),
+      source: resolve(
+        dirname(require.resolve(pluginPackageName)),
+        templateDirName,
+        dir,
+      ),
       target: join(myBrewBase, dir),
     }))
 
