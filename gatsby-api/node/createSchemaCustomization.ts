@@ -1,44 +1,37 @@
-import { GatsbyNode, Node, PluginOptions, CreateSchemaCustomizationArgs } from "gatsby"
-import { splitProxyString } from "gatsbyNodeTools"
-import { get } from "lodash"
+import {
+  GatsbyNode,
+  PluginOptions,
+  CreateSchemaCustomizationArgs,
+} from "gatsby"
 
 type ProxyResolveProps = {
   from: string
 }
 
-const extensionPoint: GatsbyNode["createSchemaCustomization"] = async (props: CreateSchemaCustomizationArgs, themeOptions: PluginOptions) => {
-  const { actions } = props
-  const { createFieldExtension } = actions
+const extensionPoint: GatsbyNode["createSchemaCustomization"] = async (
+  props: CreateSchemaCustomizationArgs,
+  _themeOptions: PluginOptions,
+) => {
+  const { actions, reporter } = props
+  const { createTypes } = actions
+  reporter.log("Creating types")
+  createTypes(`
+    type Site implements Node @infer {
+      siteMetadata: SiteSiteMetadata
+    }
 
-  // From: https://github.com/jlengstorf/gatsby-advanced-graphql/blob/master/gatsby-node.js#L14
-  //@ts-ignore plugin not optional
-  createFieldExtension({
-    name: "proxyResolve",
-    args: {
-      from: { type: "String!" },
-    },
-    extend: (options: ProxyResolveProps) => {
-      return {
-        // TODO find out what context/info end up being
-        resolve: async (source: Node, args: any, context: any, info: any) => {
-          await context.nodeModel.prepareNodes(
-            info.parentType, // BlogPostMarkdown or whatever
-            splitProxyString(options.from), // querying for html field
-            splitProxyString(options.from), // resolve this field
-            [info.parentType.name], // The types to use are these
-          )
+    type SiteSiteMetadata @infer {
+      github: SiteSiteMetadataGithub
+    }
 
-          const newSource = await context.nodeModel.runQuery({
-            type: info.parentType,
-            query: { filter: { id: { eq: source.id } } },
-            firstOnly: true,
-          })
+    type SiteSiteMetadataGithub {
+      username: String
+      repo: String
+      branch: String
+    }
+  `)
 
-          return get(newSource.__gatsby_resolved, options.from)
-        },
-      }
-    },
-  })
+  return
 }
 
 export default extensionPoint
