@@ -39,6 +39,13 @@ export const createDirectories = async function(
   const { store, reporter } = props
   const { program } = store.getState() as ExpectedGatsbyStoreState
   const myBrewRepoDir = program.directory // where it's running now
+  console.log({
+    props,
+    pluginDirectory,
+    pluginId,
+    contentDirectories,
+    myBrewRepoDir,
+  })
   // mybrew/homebrew/exalted3e
   const myBrewBase = join(myBrewRepoDir, contentBaseDir, pluginId)
   const to_make: SourceTarget[] = contentDirectories
