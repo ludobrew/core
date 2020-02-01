@@ -93,19 +93,37 @@ export const splitProxyString = (str: string) =>
   }, {})
 
 /**
- * Returns data, throws error
+ * Returns a funciton that just returns the data and throws error otherwise
+ *
+ * @example
+ * ```js
+  const { graphql } = props
+  const gql = simpleGraphql(graphql)
+  const results = gql`query MyQuery {}`
+ ```
  * @param graphql the graphql from the gatsby-node api
  * @param query
  */
-export const simpleGraphql = async (
-  graphql: CreatePagesArgs["graphql"],
-  query: string,
-) => {
-  const { errors, data } = await graphql(query)
-  if (errors) {
-    throw errors
+export const simpleGraphql = (graphql: CreatePagesArgs["graphql"]) => {
+  return async <T = any>(query: TemplateStringsArray, ...values: any) => {
+    // Moosh template strings array with everything in values since we're just looking
+    // for the default stringy thing.
+    const interspersed: any[] = []
+    for (const s of query) {
+      interspersed.push(s)
+      if (values.length > 0) {
+        interspersed.push(values.pop())
+      }
+    }
+
+    const { errors, data } = await graphql(
+      [...interspersed, ...values].join(""),
+    )
+    if (errors) {
+      throw errors
+    }
+    return data as T
   }
-  return data
 }
 
 type HasCreateNode = {
