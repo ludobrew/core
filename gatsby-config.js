@@ -5,6 +5,9 @@ module.exports = (themeOptions) => {
         resolve: "gatsby-plugin-mdx",
         options: {
           extensions: [".mdx", ".md"],
+          remarkPlugins: [
+            require("remark-slug"),
+          ]
         },
       },
       "gatsby-plugin-react-helmet-async",
