@@ -1,15 +1,6 @@
 module.exports = (themeOptions) => {
   return {
     plugins: [
-      {
-        resolve: "gatsby-plugin-mdx",
-        options: {
-          extensions: [".mdx", ".md"],
-          remarkPlugins: [
-            require("remark-slug"),
-          ]
-        },
-      },
       "gatsby-plugin-react-helmet-async",
       {
         resolve: "gatsby-plugin-typescript",
@@ -18,6 +9,16 @@ module.exports = (themeOptions) => {
           jsxPragma: `React`,
           allExtensions: true,
           resolveJsonModule: true,
+        },
+      },
+      "gatsby-plugin-theme-ui",
+      {
+        resolve: "gatsby-plugin-mdx",
+        options: {
+          extensions: [".mdx", ".md"],
+          remarkPlugins: [
+            require("remark-slug"),
+          ]
         },
       },
     ],

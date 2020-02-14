@@ -21,10 +21,9 @@ type CreateDirectoriesArgs = {
   props: ParentSpanPluginArgs
   options: PluginOptions | undefined
   /**
-   * Use the package.json name like "@ludobrew/game-exalted-3e"
+   * Use the package.json name like "gatsby-theme-ludobrew-exalted-3e"
    */
   pluginPackageName: string
-  pluginId: string
   contentDirectories: readonly string[]
 }
 
@@ -35,13 +34,13 @@ type CreateDirectoriesArgs = {
 export const createDirectories = async function(
   args: CreateDirectoriesArgs,
 ): Promise<SourceTarget[]> {
-  const { props, pluginPackageName, pluginId, contentDirectories } = args
+  const { props, pluginPackageName, contentDirectories } = args
   const { store, reporter } = props
   const { program } = store.getState() as ExpectedGatsbyStoreState
   const myBrewRepoDir = program.directory // where it's running now
 
   // mybrew/homebrew/exalted3e
-  const myBrewBase = join(myBrewRepoDir, contentBaseDir, pluginId)
+  const myBrewBase = join(myBrewRepoDir, contentBaseDir)
   const to_make: SourceTarget[] = contentDirectories
     .filter(dir => !existsSync(join(myBrewBase, dir)))
     .map(dir => ({
@@ -58,17 +57,13 @@ export const createDirectories = async function(
       mkdirpasync(target, 0o775),
     )
 
-    reporter.info(`ludobrew ${pluginId}: Adding default folders`)
+    reporter.info(`ludobrew: Adding default folders`)
     const madeFolders = await Promise.all(makeHolderFolders)
-    madeFolders.forEach(folder =>
-      reporter.log(`ludobrew ${pluginId}: Added ${folder}`),
-    )
+    madeFolders.forEach(folder => reporter.log(`ludobrew: Added ${folder}`))
     const copyFiles = to_make.map(ncpasync)
-    reporter.info(
-      `ludobrew ${pluginId}: Adding default template files to folders`,
-    )
+    reporter.info(`ludobrew: Adding default template files to folders`)
     await Promise.all(copyFiles)
-    reporter.success(`ludobrew ${pluginId}: Copied default files`)
+    reporter.success(`ludobrew: Copied default files`)
     return to_make
   }
 
@@ -77,20 +72,19 @@ export const createDirectories = async function(
 
 type GenerateSourceFilesystemPluginsArgs = {
   currentDir: string
-  pluginId: string
   contentDirectories: readonly string[]
 }
 
 export const generateSourceFilesystemPlugins = function(
   args: GenerateSourceFilesystemPluginsArgs,
 ) {
-  const { pluginId, contentDirectories, currentDir } = args
+  const { contentDirectories } = args
 
   return contentDirectories.map(path => ({
     resolve: "gatsby-source-filesystem",
     options: {
-      name: [pluginId, path].join("/"),
-      path: [contentBaseDir, pluginId, path].join("/"),
+      name: path,
+      path: [contentBaseDir, path].join("/"),
       ignore: [`**/\.*`],
     },
   }))

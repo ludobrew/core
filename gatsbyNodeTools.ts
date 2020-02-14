@@ -13,38 +13,6 @@ export type FileNode = {
 } & Node
 
 /**
- * Strips and returns what directory it came out of. Use this because sites could have other stuff.
- * @param contentDirectories The array of content directories that could be sourced
- * @param pluginId the plugin's pluginId
- * @param fileNode the sourced fileNode
- */
-export const getSourceInstanceName = function(
-  contentDirectories: readonly string[],
-  pluginId: string,
-  fileNode: FileNode,
-) {
-  const sourceName = fileNode.sourceInstanceName
-  if (!sourceName) {
-    return null
-  }
-
-  if (sourceName.indexOf(pluginId) < 0) {
-    // not found
-    return null
-  }
-
-  const prefixRemoved = sourceName.slice(pluginId.length + 1, sourceName.length)
-
-  if (contentDirectories.indexOf(prefixRemoved) < 0) {
-    throw new Error(
-      `ludobrew ${pluginId}: ${prefixRemoved} is not in the provided contentDirectories, but was made somewhere. Something is screwy!`,
-    )
-  }
-
-  return prefixRemoved as typeof contentDirectories[number]
-}
-
-/**
  * Turn a series of things into a path
  * @param  {...string} args ["a", "Bee Sea"]
  * @returns {string} "/a/bee-sea"
@@ -154,6 +122,8 @@ type GameInfo = {
    * Short blurb about the game itself.
    */
   gameDescription: string
+
+  // TODO: Include other stuff for indexing.
 }
 
 export const createLudobrewEntry = <T extends HasCreateNode>(

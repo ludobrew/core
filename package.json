@@ -1,5 +1,5 @@
 {
-  "name": "@ludobrew/core",
+  "name": "gatsby-theme-ludobrew-core",
   "publishConfig": {
     "access": "public"
   },
@@ -20,14 +20,12 @@
   },
   "dependencies": {
     "@babel/core": "7.8.4",
-    "@emotion/core": "10.0.27",
-    "@emotion/styled": "10.0.27",
     "@mdx-js/mdx": "1.5.5",
     "@mdx-js/react": "1.5.5",
     "dashify": "2.0.0",
     "gatsby": "2.19.11",
-    "gatsby-plugin-emotion": "4.1.22",
     "gatsby-plugin-mdx": "1.0.70",
+    "gatsby-plugin-theme-ui": "0.3.0",
     "gatsby-plugin-page-creator": "2.1.40",
     "gatsby-plugin-react-helmet-async": "1.0.15",
     "gatsby-plugin-typescript": "2.1.27",
