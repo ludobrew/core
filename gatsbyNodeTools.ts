@@ -17,8 +17,9 @@ export type FileNode = {
  * @param  {...string} args ["a", "Bee Sea"]
  * @returns {string} "/a/bee-sea"
  */
-export const pathify = (...args: string[]) => {
-  return "/" + args.map(arg => dashify(arg)).join("/")
+export const pathify = (...args: (string | undefined | null)[]) => {
+  const pureArgs: string[] = args.filter((arg) => arg) as string[]
+  return "/" + pureArgs.map((arg) => dashify(arg)).join("/")
 }
 
 /**
