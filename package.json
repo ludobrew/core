@@ -19,36 +19,36 @@
     "build": "tsc --no-emit"
   },
   "dependencies": {
-    "@babel/core": "7.9.0",
-    "@mdx-js/mdx": "1.5.9",
-    "@mdx-js/react": "1.5.9",
-    "@types/yup": "^0.28.0",
+    "@babel/core": "7.9.6",
+    "@mdx-js/mdx": "1.6.1",
+    "@mdx-js/react": "1.6.1",
+    "@types/yup": "^0.28.3",
     "dashify": "2.0.0",
-    "gatsby": "2.20.36",
-    "gatsby-plugin-mdx": "1.1.11",
-    "gatsby-plugin-page-creator": "2.2.4",
+    "gatsby": "2.21.30",
+    "gatsby-plugin-mdx": "1.2.7",
+    "gatsby-plugin-page-creator": "2.3.2",
     "gatsby-plugin-react-helmet-async": "1.0.16",
     "gatsby-plugin-theme-ui": "0.3.0",
-    "gatsby-plugin-typescript": "2.3.5",
-    "gatsby-source-filesystem": "2.2.5",
+    "gatsby-plugin-typescript": "2.4.2",
+    "gatsby-source-filesystem": "2.3.3",
     "lodash": "4.17.15",
     "ncp": "2.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-helmet-async": "1.0.5",
+    "react-helmet-async": "1.0.6",
     "remark-slug": "6.0.0",
     "theme-ui": "0.3.1",
-    "ts-node": "8.9.0",
-    "typescript": "3.8.3",
-    "yup": "^0.28.4"
+    "ts-node": "8.10.1",
+    "typescript": "3.9.2",
+    "yup": "^0.28.5"
   },
   "devDependencies": {
     "@types/dashify": "1.0.0",
     "@types/lodash": "4.14.150",
     "@types/ncp": "2.0.3",
-    "@types/node": "13.13.2",
-    "@types/react": "16.9.34",
-    "@types/react-dom": "16.9.6",
-    "@types/theme-ui": "0.3.1"
+    "@types/node": "14.0.1",
+    "@types/react": "16.9.35",
+    "@types/react-dom": "16.9.8",
+    "@types/theme-ui": "0.3.2"
   }
 }

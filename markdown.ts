@@ -1,7 +1,7 @@
 import { getFilePath, FileNode } from "./gatsbyNodeTools"
 import { Reporter } from "gatsby"
 
-export const generateFrontmatterCheckers = function(values: readonly string[]) {
+export const generateFrontmatterCheckers = function (_: readonly string[]) {
   const errorMessage = (
     fileNode: FileNode,
     name: string,
@@ -20,9 +20,7 @@ export const generateFrontmatterCheckers = function(values: readonly string[]) {
     for (const value in values) {
       const lookingFor = values[value]
       if (!object[lookingFor]) {
-        reporter.error(
-          errorMessage(fileNode, values[value], ["anything!"])
-        )
+        reporter.error(errorMessage(fileNode, values[value], ["anything!"]))
       }
     }
   }
