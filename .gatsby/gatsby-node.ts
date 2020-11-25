@@ -1,16 +1,8 @@
-import {
-  GatsbyNode,
-  PluginOptions,
-  CreateSchemaCustomizationArgs,
-} from "gatsby"
+import { GatsbyNode } from "gatsby"
 
-type ProxyResolveProps = {
-  from: string
-}
-
-const extensionPoint: GatsbyNode["createSchemaCustomization"] = async (
-  props: CreateSchemaCustomizationArgs,
-  _themeOptions: PluginOptions,
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = async (
+  props,
+  _themeOptions,
 ) => {
   const { actions, reporter } = props
   const { createTypes } = actions
@@ -33,5 +25,3 @@ const extensionPoint: GatsbyNode["createSchemaCustomization"] = async (
 
   return
 }
-
-export default extensionPoint

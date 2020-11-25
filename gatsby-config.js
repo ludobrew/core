@@ -1,26 +1,7 @@
-module.exports = (themeOptions) => {
-  return {
-    plugins: [
-      "gatsby-plugin-react-helmet-async",
-      {
-        resolve: "gatsby-plugin-typescript",
-        options: {
-          isTSX: true,
-          jsxPragma: `React`,
-          allExtensions: true,
-          resolveJsonModule: true,
-        },
-      },
-      "gatsby-plugin-theme-ui",
-      {
-        resolve: "gatsby-plugin-mdx",
-        options: {
-          extensions: [".mdx", ".md"],
-          remarkPlugins: [
-            require("remark-slug"),
-          ]
-        },
-      },
-    ],
-  }
-}
+//@ts-ignore doesn't have typdefs TODO Find them?
+const tsconfig = require("gatsby-plugin-ts-config")
+
+module.exports = tsconfig.generateConfig({
+  configDir: ".gatsby",
+  projectRoot: __dirname,
+})
